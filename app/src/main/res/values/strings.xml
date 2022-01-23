@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FinderUserTest</string>
+    <string name="search">Search</string>
 </resources>
