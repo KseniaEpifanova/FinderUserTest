@@ -7,6 +7,7 @@ import com.ksuta.finderusertest.screens.search.UsersModel
 
 internal fun UserModelDto.toUserModel(): UserModel {
     return UserModel(
+        userId = userId,
         acceptRate = acceptRate,
         displayName = displayName,
         profileImage = profileImage

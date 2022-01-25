@@ -3,6 +3,8 @@ package com.ksuta.finderusertest.network.model
 import com.google.gson.annotations.SerializedName
 
 data class UserModelDto(
+
+    @SerializedName("user_id") val userId: Int,
     @SerializedName("acceptRate") val acceptRate: String,
     @SerializedName("display_name") val displayName: String,
     @SerializedName("profile_image") val profileImage: String
