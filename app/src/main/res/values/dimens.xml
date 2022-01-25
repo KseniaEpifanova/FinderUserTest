@@ -9,5 +9,6 @@
     <dimen name="normal_spacing">16dp</dimen>
     <dimen name="large_spacing">24dp</dimen>
 
+    <dimen name="minHeightItem">56dp</dimen>
 
 </resources>

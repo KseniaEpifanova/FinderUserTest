@@ -1,15 +1,17 @@
 package com.ksuta.finderusertest.network
 
+import android.content.Context
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Component
 import dagger.Module
 import dagger.Provides
-import kotlinx.serialization.json.Json
-import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.ksuta.finderusertest.network.NetworkProvider.Companion.SERVER_URL
+import okhttp3.Cache
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Singleton
@@ -39,13 +41,14 @@ interface NetworkComponent : NetworkProvider {
 internal object NetworkModule {
 
     @Provides
-    fun provideOkHttpClient(): OkHttpClient =
+    fun provideOkHttpClient(context: Context): OkHttpClient =
         OkHttpClient.Builder()
             .addInterceptor { chain ->
                 val authRequest = chain.request().newBuilder()
                     .build()
                 chain.proceed(authRequest)
             }
+            .cache(Cache(context.cacheDir, Integer.MAX_VALUE.toLong()))
             .build()
 
 
@@ -53,30 +56,27 @@ internal object NetworkModule {
     @Singleton
     fun providesRetrofit(
         okHttpClient: OkHttpClient,
-        json: Json
+        gson: Gson
     ): Retrofit {
         val builder = Retrofit.Builder()
             .baseUrl(SERVER_URL)
             .client(okHttpClient)
-            .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
         return builder.build()
     }
 
     @Provides
     @Singleton
-    fun provideJson(): Json {
-        return Json(Json.Default) {
-            ignoreUnknownKeys = true
-        }
-    }
+    @JvmStatic
+    fun provideGson(): Gson = GsonBuilder().create()
 }
 
 interface NetworkProvider {
 
     fun providesRetrofit(): Retrofit
 
-    fun provideJson(): Json
+    fun provideGson(): Gson
 
     companion object {
         const val SERVER_URL = "https://api.stackexchange.com/2.0/"

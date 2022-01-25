@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <EditText
         android:id="@+id/queryView"
@@ -31,9 +31,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/newsView"
+        android:id="@+id/usersView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/auto_size"
         android:layout_marginStart="@dimen/small_spacing"
         android:layout_marginTop="@dimen/small_spacing"
         android:layout_marginEnd="@dimen/small_spacing"
@@ -42,6 +42,7 @@
         android:paddingTop="@dimen/normal_spacing"
         android:paddingBottom="@dimen/normal_spacing"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/queryView"
