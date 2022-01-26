@@ -5,18 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="@dimen/tiny_spacing"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/queryView"
         android:layout_width="@dimen/auto_size"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/normal_spacing"
         android:layout_marginEnd="@dimen/small_spacing"
         android:hint="@string/search"
         android:importantForAutofill="no"
         android:inputType="text"
-        android:layout_margin="@dimen/normal_spacing"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarView"
         tools:ignore="LabelFor" />
 
     <androidx.recyclerview.widget.RecyclerView

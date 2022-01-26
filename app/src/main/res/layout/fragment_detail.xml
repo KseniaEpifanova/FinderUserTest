@@ -5,16 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.appcompat.widget.Toolbar
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        android:id="@+id/toolbarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="@dimen/tiny_spacing"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="160dp"
         android:layout_height="160dp"
-        android:layout_marginTop="@dimen/icon_size"
         android:contentDescription="@null"
         android:scaleType="centerCrop"
+        android:layout_marginTop="@dimen/normal_spacing"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarView"
         tools:src="@tools:sample/backgrounds/scenic" />
 
 

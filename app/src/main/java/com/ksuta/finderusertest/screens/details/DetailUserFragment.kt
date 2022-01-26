@@ -16,7 +16,11 @@ import com.ksuta.finderusertest.screens.details.di.DetailUserFragmentComponent
 import com.ksuta.finderusertest.utils.observeToSafe
 import javax.inject.Inject
 import android.view.MenuItem
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.ksuta.finderusertest.R
+import com.ksuta.finderusertest.screens.main.MainActivity
+import kotlinx.android.synthetic.main.fragment_detail.*
 
 class DetailUserFragment : Fragment(R.layout.fragment_detail) {
 
@@ -25,7 +29,12 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail) {
 
     private val viewModel by viewModels<DetailUserViewModel> { factory }
     private val viewBinding by viewBinding(FragmentDetailBinding::bind)
-
+    private val navController: NavController by lazy {
+        Navigation.findNavController(
+            requireActivity(),
+            R.id.main_navigation
+        )
+    }
     private val args: DetailUserFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,6 +43,8 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail) {
             .inject(this)
         subscribeToViewModel()
         setOptionsMenuVisible(true)
+        (activity as MainActivity).setSupportActionBar(toolbarView)
+        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun subscribeToViewModel() {
@@ -81,12 +92,14 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail) {
                 placeholder(ColorDrawable(Color.TRANSPARENT))
             }
         }
+        toolbarView.title = model.name
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home ->
-                true
+                navController.popBackStack()
+
             else -> false
         }
     }

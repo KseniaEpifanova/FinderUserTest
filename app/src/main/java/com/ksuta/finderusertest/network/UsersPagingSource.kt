@@ -58,6 +58,7 @@ class UsersPagingSource @AssistedInject constructor(
             val prevPageNumber = if (pageNumber > 1) pageNumber - 1 else null
             LoadResult.Page(users, prevPageNumber, nextPageNumber)
         } else {
+            Timber.e(response.toString())
             LoadResult.Error(HttpException(response))
         }
     }

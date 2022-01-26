@@ -21,6 +21,7 @@ import com.ksuta.finderusertest.screens.search.adapters.ItemCallback
 import com.ksuta.finderusertest.screens.search.adapters.UsersLoaderStateAdapter
 import com.ksuta.finderusertest.screens.search.di.SearchFragmentComponent
 import com.ksuta.finderusertest.utils.navigate
+import kotlinx.android.synthetic.main.fragment_detail.*
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.launchIn
@@ -34,12 +35,6 @@ class SearchFragment : Fragment(R.layout.fragment_search), ItemCallback {
 
     private val viewModel by viewModels<SearchViewModel> { factory }
     private val viewBinding by viewBinding(FragmentSearchBinding::bind)
-    private val navController: NavController by lazy {
-        findNavController(
-            requireActivity(),
-            R.id.main_navigation
-        )
-    }
 
     private val adapter by lazy(LazyThreadSafetyMode.NONE) {
         HomeUsersAdapter(requireActivity(), this)
@@ -56,6 +51,7 @@ class SearchFragment : Fragment(R.layout.fragment_search), ItemCallback {
             queryView.doAfterTextChanged { text ->
                 viewModel.setQuery(text?.toString() ?: "")
             }
+            toolbarView.title = requireContext().getString(R.string.app_name)
         }
 
         adapter.addLoadStateListener { state ->
