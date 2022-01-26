@@ -18,6 +18,7 @@ import javax.inject.Inject
 import android.view.MenuItem
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
 import com.ksuta.finderusertest.R
 import com.ksuta.finderusertest.screens.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_detail.*
@@ -32,11 +33,15 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail) {
     private val navController: NavController by lazy {
         Navigation.findNavController(
             requireActivity(),
-            R.id.main_navigation
+            R.id.nav_host_fragment
         )
     }
     private val args: DetailUserFragmentArgs by navArgs()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        childFragmentManager
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         DetailUserFragmentComponent.init(requireActivity() as AppCompatActivity, args.idArg)
@@ -45,6 +50,8 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail) {
         setOptionsMenuVisible(true)
         (activity as MainActivity).setSupportActionBar(toolbarView)
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+       // val navHostFragment = childFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+      //  val navController = navHostFragment.navController
     }
 
     private fun subscribeToViewModel() {
