@@ -1,35 +1,48 @@
 package com.ksuta.finderusertest.screens.search
 
 import android.os.Bundle
+import android.provider.Settings
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.*
+import androidx.navigation.NavController
+import androidx.navigation.Navigation.findNavController
 import androidx.paging.LoadState
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.ksuta.finderusertest.R
 import com.ksuta.finderusertest.databinding.FragmentSearchBinding
 import com.ksuta.finderusertest.screens.search.adapters.HomeUsersAdapter
+import com.ksuta.finderusertest.screens.search.adapters.ItemCallback
 import com.ksuta.finderusertest.screens.search.adapters.UsersLoaderStateAdapter
 import com.ksuta.finderusertest.screens.search.di.SearchFragmentComponent
+import com.ksuta.finderusertest.utils.navigate
+import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
-class SearchFragment : Fragment(R.layout.fragment_search) {
+class SearchFragment : Fragment(R.layout.fragment_search), ItemCallback {
 
     @Inject
     lateinit var factory: ViewModelProvider.Factory
 
     private val viewModel by viewModels<SearchViewModel> { factory }
     private val viewBinding by viewBinding(FragmentSearchBinding::bind)
+    private val navController: NavController by lazy {
+        findNavController(
+            requireActivity(),
+            R.id.main_navigation
+        )
+    }
 
     private val adapter by lazy(LazyThreadSafetyMode.NONE) {
-        HomeUsersAdapter(requireActivity())
+        HomeUsersAdapter(requireActivity(), this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,7 +66,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             }
         }
 
-
         addRepeatingJob(Lifecycle.State.STARTED) {
             viewModel.users
                 .collectLatest(adapter::submitData)
@@ -71,6 +83,15 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 setText(searchQuery)
             }
         }
+    }
+
+    override fun onClick(userId: Int?) {
+        val action = userId?.let {
+            SearchFragmentDirections.actionSearchFragmentToDetailUserFragment(
+                it
+            )
+        }
+        action?.let { navigate(it) }
     }
 
 }

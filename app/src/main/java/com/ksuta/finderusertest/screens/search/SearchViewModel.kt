@@ -3,11 +3,7 @@ package com.ksuta.finderusertest.screens.search
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
-import androidx.paging.PagingSource
-import com.ksuta.finderusertest.network.ISearchRepository
+import androidx.paging.*
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 import javax.inject.Provider
@@ -25,6 +21,7 @@ class SearchViewModel
     val users: StateFlow<PagingData<UserModel>> = query
         .map(::newPager)
         .flatMapLatest { pager -> pager.flow }
+        .cachedIn(viewModelScope)
         .stateIn(viewModelScope, SharingStarted.Lazily, PagingData.empty())
 
     private fun newPager(query: String): Pager<Int, UserModel> {

@@ -9,26 +9,15 @@
         android:id="@+id/queryView"
         android:layout_width="@dimen/auto_size"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/normal_spacing"
         android:layout_marginEnd="@dimen/small_spacing"
         android:hint="@string/search"
         android:importantForAutofill="no"
         android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="@+id/searchView"
-        app:layout_constraintEnd_toStartOf="@+id/searchView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/searchView"
-        tools:ignore="LabelFor" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/searchView"
-        android:layout_width="@dimen/icon_size"
-        android:layout_height="@dimen/icon_size"
-        android:layout_marginTop="@dimen/large_spacing"
-        android:layout_marginEnd="@dimen/normal_spacing"
-        android:background="@drawable/ic_baseline_search_24"
+        android:layout_margin="@dimen/normal_spacing"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="LabelFor" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/usersView"

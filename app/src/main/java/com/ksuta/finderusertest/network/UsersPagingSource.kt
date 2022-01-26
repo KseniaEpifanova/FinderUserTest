@@ -2,6 +2,7 @@ package com.ksuta.finderusertest.network
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.ksuta.finderusertest.network.UsersApi.Companion.SITE_KEY
 import com.ksuta.finderusertest.network.model.UsersModelDto
 import com.ksuta.finderusertest.screens.search.UserModel
 import dagger.assisted.Assisted
@@ -24,10 +25,10 @@ class UsersPagingSource @AssistedInject constructor(
             val responses =
                 if (query.isBlank()) getAllUsers(pageNumber, pageSize) else
                     getUsersByQuery(
-                    pageNumber,
-                    pageSize,
-                    query
-                )
+                        pageNumber,
+                        pageSize,
+                        query
+                    )
             getUsersPage(responses, pageNumber)
         } catch (e: HttpException) {
             Timber.e(e.message())
@@ -39,14 +40,17 @@ class UsersPagingSource @AssistedInject constructor(
     }
 
     private suspend fun getAllUsers(pageNumber: Int, pageSize: Int) =
-        newsService.getUsers(pageNumber, pageSize, SORT_KEY,SITE_KEY)
+        newsService.getUsers(pageNumber, pageSize, SORT_KEY, SITE_KEY)
 
 
     private suspend fun getUsersByQuery(pageNumber: Int, pageSize: Int, query: String) =
-        newsService.getUsersWithQuery(pageNumber, pageSize, SORT_KEY, query,SITE_KEY)
+        newsService.getUsersWithQuery(pageNumber, pageSize, SORT_KEY, query, SITE_KEY)
 
 
-    private fun getUsersPage(response: Response<UsersModelDto>, pageNumber: Int): LoadResult<Int, UserModel> {
+    private fun getUsersPage(
+        response: Response<UsersModelDto>,
+        pageNumber: Int
+    ): LoadResult<Int, UserModel> {
         return if (response.isSuccessful) {
             val users = response.body()!!.itemsUser.map { it.toUserModel() }
 
@@ -74,7 +78,5 @@ class UsersPagingSource @AssistedInject constructor(
 
         const val INITIAL_PAGE_NUMBER = 1
         const val SORT_KEY = "name"
-        const val SITE_KEY = "stackoverflow"
-
     }
 }

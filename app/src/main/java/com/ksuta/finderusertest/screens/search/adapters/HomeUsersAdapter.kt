@@ -12,13 +12,18 @@ import com.ksuta.finderusertest.R
 import com.ksuta.finderusertest.databinding.ItemUserBinding
 import com.ksuta.finderusertest.screens.search.UserModel
 
-class HomeUsersAdapter(context: Context) :
+class HomeUsersAdapter(context: Context, val listener: ItemCallback) :
     PagingDataAdapter<UserModel, HomeNewsViewHolder>(ArticleDiffItemCallback) {
 
     private val layoutInflater: LayoutInflater = LayoutInflater.from(context)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeNewsViewHolder {
-        return HomeNewsViewHolder(layoutInflater.inflate(R.layout.item_user, parent, false))
+        return HomeNewsViewHolder(
+            layoutInflater.inflate(
+                R.layout.item_user, parent,
+                false
+            ), listener
+        )
     }
 
     override fun onBindViewHolder(holder: HomeNewsViewHolder, position: Int) {
@@ -26,14 +31,19 @@ class HomeUsersAdapter(context: Context) :
     }
 }
 
-class HomeNewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
+class HomeNewsViewHolder(itemView: View, listener: ItemCallback) :
+    RecyclerView.ViewHolder(itemView) {
+    private var listener: ItemCallback? = null
     private val viewBinding by viewBinding(ItemUserBinding::bind)
+
+    init {
+        this.listener = listener
+    }
 
     fun bind(userModel: UserModel?) {
 
         with(viewBinding) {
-            //show rate
+            card.setOnClickListener { listener?.onClick(userModel?.userId) }
             title.text = userModel?.displayName
         }
     }
@@ -48,4 +58,8 @@ private object ArticleDiffItemCallback : DiffUtil.ItemCallback<UserModel>() {
     override fun areContentsTheSame(oldItem: UserModel, newItem: UserModel): Boolean {
         return oldItem.displayName == newItem.displayName && oldItem.acceptRate == newItem.acceptRate
     }
+}
+
+interface ItemCallback {
+    fun onClick(userId: Int?)
 }

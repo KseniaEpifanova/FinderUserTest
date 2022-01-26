@@ -5,14 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <ImageView
-        android:id="@+id/image"
+        android:id="@+id/imageView"
         android:layout_width="160dp"
         android:layout_height="160dp"
+        android:layout_marginTop="@dimen/icon_size"
         android:contentDescription="@null"
         android:scaleType="centerCrop"
-        android:layout_marginTop="@dimen/large_spacing"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,67 +19,92 @@
 
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
+        android:id="@+id/nameView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/normal_spacing"
+        android:layout_margin="@dimen/normal_spacing"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
         tools:text="User Name" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/reputation"
+        android:id="@+id/reputationView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/normal_spacing"
-        app:layout_constraintEnd_toEndOf="@+id/name"
-        app:layout_constraintStart_toStartOf="@+id/name"
-        app:layout_constraintTop_toBottomOf="@+id/name"
-        tools:text="Reputation" />
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/nameView"
+        app:layout_constraintStart_toStartOf="@+id/nameView"
+        app:layout_constraintTop_toBottomOf="@+id/nameView"
+        tools:text="Reputation"
+        tools:visibility="visible" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tags"
+        android:id="@+id/tagsView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/normal_spacing"
-        app:layout_constraintEnd_toEndOf="@+id/name"
-        app:layout_constraintStart_toStartOf="@+id/name"
-        app:layout_constraintTop_toBottomOf="@+id/reputation"
-        tools:text="Top Tags" />
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/nameView"
+        app:layout_constraintStart_toStartOf="@+id/nameView"
+        app:layout_constraintTop_toBottomOf="@+id/reputationView"
+        tools:text="Top Tags"
+        tools:visibility="visible" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/badges"
+        android:id="@+id/badgesView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/normal_spacing"
-        app:layout_constraintEnd_toEndOf="@+id/name"
-        app:layout_constraintStart_toStartOf="@+id/name"
-        app:layout_constraintTop_toBottomOf="@+id/tags"
-        tools:text="Badges" />
-
-
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/nameView"
+        app:layout_constraintStart_toStartOf="@+id/nameView"
+        app:layout_constraintTop_toBottomOf="@+id/tagsView"
+        tools:text="Badges"
+        tools:visibility="visible" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/location"
+        android:id="@+id/locationView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/normal_spacing"
-
-        app:layout_constraintEnd_toEndOf="@+id/name"
-        app:layout_constraintStart_toStartOf="@+id/name"
-        app:layout_constraintTop_toBottomOf="@+id/badges"
-        tools:text="Location" />
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/nameView"
+        app:layout_constraintStart_toStartOf="@+id/nameView"
+        app:layout_constraintTop_toBottomOf="@+id/badgesView"
+        tools:text="Location"
+        tools:visibility="visible" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/creationDate"
+        android:id="@+id/creationDateView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/normal_spacing"
-        app:layout_constraintEnd_toEndOf="@+id/name"
-        app:layout_constraintStart_toStartOf="@+id/name"
-        app:layout_constraintTop_toBottomOf="@+id/location"
-        tools:text="Creation Date" />
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/nameView"
+        app:layout_constraintStart_toStartOf="@+id/nameView"
+        app:layout_constraintTop_toBottomOf="@+id/locationView"
+        tools:text="Creation Date"
+        tools:visibility="visible" />
 
     <ProgressBar
         android:id="@+id/progressView"

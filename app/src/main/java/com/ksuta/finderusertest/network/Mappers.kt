@@ -1,19 +1,24 @@
 package com.ksuta.finderusertest.network
 
 import com.ksuta.finderusertest.network.model.UserModelDto
-import com.ksuta.finderusertest.network.model.UsersModelDto
+import com.ksuta.finderusertest.network.model.UserModelTagsDto
 import com.ksuta.finderusertest.screens.search.UserModel
-import com.ksuta.finderusertest.screens.search.UsersModel
+import com.ksuta.finderusertest.screens.search.UserTagsModel
 
 internal fun UserModelDto.toUserModel(): UserModel {
     return UserModel(
         userId = userId,
         acceptRate = acceptRate,
         displayName = displayName,
-        profileImage = profileImage
+        profileImage = profileImage,
+        reputation = reputation,
+        location = location,
+        creationDate = creationDate
     )
 }
 
-private fun UsersModelDto.toUsersModel(): UsersModel {
-    return UsersModel(itemsUser = itemsUser.map { it.toUserModel() })
+internal fun UserModelTagsDto.toUserTagsModel(): UserTagsModel {
+    return UserTagsModel(
+        name = name
+    )
 }
