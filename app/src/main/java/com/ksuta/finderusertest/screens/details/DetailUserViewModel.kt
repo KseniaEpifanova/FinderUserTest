@@ -48,7 +48,7 @@ class DetailUserViewModel
             model?.displayName.orEmpty(),
             model?.profileImage.orEmpty(),
             model?.reputation,
-            tags.joinToString(separator = SEPARATOR),
+            tags.joinToString(separator = SEPARATOR){ it?.name.orEmpty() },
             model?.location,
             getDate(model?.creationDate)
         )
