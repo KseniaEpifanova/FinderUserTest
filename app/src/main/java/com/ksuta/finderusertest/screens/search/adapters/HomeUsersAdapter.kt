@@ -1,4 +1,4 @@
-package com.ksuta.finderusertest.screens.search
+package com.ksuta.finderusertest.screens.search.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.ksuta.finderusertest.R
 import com.ksuta.finderusertest.databinding.ItemUserBinding
+import com.ksuta.finderusertest.screens.search.UserModel
 
 class HomeUsersAdapter(context: Context) :
     PagingDataAdapter<UserModel, HomeNewsViewHolder>(ArticleDiffItemCallback) {

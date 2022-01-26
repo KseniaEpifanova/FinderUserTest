@@ -1,4 +1,4 @@
-package com.ksuta.finderusertest.screens.search
+package com.ksuta.finderusertest.screens.search.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ksuta.finderusertest.databinding.ItemErrorBinding
 import com.ksuta.finderusertest.databinding.ItemProgressBinding
 
-class UsersLoaderStateAdapter() : LoadStateAdapter<UsersLoaderStateAdapter.ItemViewHolder>() {
+class UsersLoaderStateAdapter : LoadStateAdapter<UsersLoaderStateAdapter.ItemViewHolder>() {
 
     override fun getStateViewType(loadState: LoadState) = when (loadState) {
         is LoadState.NotLoading -> error("Not supported")

@@ -1,4 +1,4 @@
-package com.ksuta.finderusertest.screens.main
+package com.ksuta.finderusertest.screens.details.di
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
@@ -6,7 +6,6 @@ import com.ksuta.finderusertest.di.AppComponent
 import com.ksuta.finderusertest.di.FragmentScope
 import com.ksuta.finderusertest.di.ViewModelProviderModule
 import com.ksuta.finderusertest.di.KeyViewModel
-import com.ksuta.finderusertest.network.ISearchRepository
 import com.ksuta.finderusertest.network.UsersApi
 import com.ksuta.finderusertest.network.appComponent
 import com.ksuta.finderusertest.screens.details.DetailUserFragment
@@ -25,7 +24,7 @@ interface DetailUserFragmentComponent {
 
     companion object {
         fun init(activity: AppCompatActivity): DetailUserFragmentComponent =
-            DaggerSearchFragmentComponent.factory().newInstance(activity, activity.appComponent)
+            DaggerDetailUserFragmentComponent.factory().newInstance(activity, activity.appComponent)
     }
 
     @Component.Factory

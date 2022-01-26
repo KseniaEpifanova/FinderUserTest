@@ -1,8 +1,11 @@
 package com.ksuta.finderusertest.network
 
+import com.ksuta.finderusertest.network.model.UserModelDto
 import com.ksuta.finderusertest.network.model.UsersModelDto
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface UsersApi {
@@ -24,6 +27,12 @@ interface UsersApi {
         @Query("site") site: String
     ): Response<UsersModelDto>
 
+    @GET("users/{ids}")
+    fun getUser(
+        @Path("ids") ids: Int,
+        //@Query("inname") inname: String,
+        @Query("site") site: String
+    ): Call<UserModelDto>
 
     companion object {
 

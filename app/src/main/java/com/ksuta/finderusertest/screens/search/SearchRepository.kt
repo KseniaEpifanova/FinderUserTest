@@ -1,7 +1,7 @@
-package com.ksuta.finderusertest.network
+package com.ksuta.finderusertest.screens.search
 
 import androidx.paging.PagingSource
-import com.ksuta.finderusertest.screens.search.UserModel
+import com.ksuta.finderusertest.network.UsersPagingSource
 import javax.inject.Inject
 
 class SearchRepository

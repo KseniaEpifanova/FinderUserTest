@@ -12,7 +12,9 @@ import androidx.paging.LoadState
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.ksuta.finderusertest.R
 import com.ksuta.finderusertest.databinding.FragmentSearchBinding
-import com.ksuta.finderusertest.screens.main.SearchFragmentComponent
+import com.ksuta.finderusertest.screens.search.adapters.HomeUsersAdapter
+import com.ksuta.finderusertest.screens.search.adapters.UsersLoaderStateAdapter
+import com.ksuta.finderusertest.screens.search.di.SearchFragmentComponent
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach

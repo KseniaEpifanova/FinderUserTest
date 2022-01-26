@@ -1,4 +1,4 @@
-package com.ksuta.finderusertest.screens.main
+package com.ksuta.finderusertest.screens.search.di
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
@@ -6,11 +6,11 @@ import com.ksuta.finderusertest.di.AppComponent
 import com.ksuta.finderusertest.di.FragmentScope
 import com.ksuta.finderusertest.di.ViewModelProviderModule
 import com.ksuta.finderusertest.di.KeyViewModel
-import com.ksuta.finderusertest.network.ISearchRepository
-import com.ksuta.finderusertest.network.SearchRepository
 import com.ksuta.finderusertest.network.UsersApi
 import com.ksuta.finderusertest.network.appComponent
+import com.ksuta.finderusertest.screens.search.ISearchRepository
 import com.ksuta.finderusertest.screens.search.SearchFragment
+import com.ksuta.finderusertest.screens.search.SearchRepository
 import com.ksuta.finderusertest.screens.search.SearchViewModel
 import dagger.*
 import dagger.multibindings.IntoMap
