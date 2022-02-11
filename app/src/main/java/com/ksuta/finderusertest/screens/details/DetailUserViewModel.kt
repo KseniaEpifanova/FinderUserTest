@@ -43,21 +43,21 @@ class DetailUserViewModel
         }
     }
 
-    private fun map(model: UserModel?, tags: List<UserTagsModel?>) {
+    private fun map(model: UserModel?, tags: List<UserTagsModel?>?) {
         setModel.value = DetailModel(
             model?.displayName.orEmpty(),
             model?.profileImage.orEmpty(),
             model?.reputation,
-            tags.joinToString(separator = SEPARATOR){ it?.name.orEmpty() },
+            tags?.joinToString(separator = SEPARATOR){ it?.name.orEmpty() },
             model?.location,
             getDate(model?.creationDate)
         )
     }
 
     @SuppressLint("SimpleDateFormat")
-    private fun getDate(l: Long?): String = l?.let { Date(it) }.run {
+    private fun getDate(l: Long?): String = l?.let { Date(it) }?.let {
         SimpleDateFormat(DATA_PATTERN).format(this)
-    }
+    }?: ""
 
     companion object{
         private const val SEPARATOR = ","
