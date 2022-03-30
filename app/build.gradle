@@ -59,7 +59,8 @@ ext.versions = [
         navVersion      : "2.3.5",
         archTesting     : '2.1.0',
         mockitoKotlin   : '3.1.0',
-        robolectric     : '4.5.1'
+        robolectric     : '4.5.1',
+        supportConstraint: "2.1.3"
 ]
 
 

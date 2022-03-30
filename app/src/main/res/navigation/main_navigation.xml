@@ -13,10 +13,6 @@
         <action
             android:id="@+id/action_searchFragment_to_detailUserFragment"
             app:destination="@id/detailUserFragment">
-            <argument
-                android:name="idArg"
-                app:argType="integer"
-                android:defaultValue="0" />
         </action>
 
     </fragment>
@@ -27,9 +23,10 @@
         android:label="DetailUserFragment"
         tools:layout="@layout/fragment_detail" >
         <argument
-            android:name="idArg"
-            app:argType="integer"
-            android:defaultValue="0" />
+            android:name="modelArg"
+            app:argType="com.ksuta.finderusertest.screens.search.UserModel"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 
 </navigation>

@@ -14,28 +14,21 @@ import javax.inject.Inject
 
 class DetailUserViewModel
 @Inject constructor(
-    private val ids: Int,
+    private val model: UserModel?,
     private val repo: IDetailRepository
 ) : ViewModel() {
 
     val setModel = MutableLiveData<DetailModel>()
 
     init {
-        getUsers()
-    }
-
-    private fun getUsers() {
-        viewModelScope.launch {
-            runCatching { repo.getUser(ids) }
-                .onSuccess {
-                    getUsersTags(it)
-                }
+        model?.userId?.let{
+            getUsersTags(it)
         }
     }
 
-    private fun getUsersTags(model: UserModel?) {
+    private fun getUsersTags(id: Int) {
         viewModelScope.launch {
-            runCatching { repo.getUserTags(ids) }
+            runCatching { repo.getUserTags(id) }
                 .onSuccess {
                     map(model,it)
                 }
@@ -56,12 +49,12 @@ class DetailUserViewModel
 
     @SuppressLint("SimpleDateFormat")
     private fun getDate(l: Long?): String = l?.let { Date(it) }?.let {
-        SimpleDateFormat(DATA_PATTERN).format(this)
+        SimpleDateFormat(DATA_PATTERN).format(it)
     }?: ""
 
     companion object{
         private const val SEPARATOR = ","
-        private const val DATA_PATTERN = "MM dd, yyyy hh:mma"
+        private const val DATA_PATTERN = "MM dd, yyyy hh:mm"
 
     }
 }

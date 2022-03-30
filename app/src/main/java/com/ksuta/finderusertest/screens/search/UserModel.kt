@@ -1,5 +1,9 @@
 package com.ksuta.finderusertest.screens.search
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class UserModel(
     val userId: Int,
     val acceptRate: String?,
@@ -8,7 +12,7 @@ data class UserModel(
     val reputation: Int?,
     val location: String?,
     val creationDate: Long?
-)
+): Parcelable
 
 data class UsersModel(
     val itemsUser: List<UserModel>?
