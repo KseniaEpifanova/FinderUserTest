@@ -43,7 +43,7 @@ class HomeNewsViewHolder(itemView: View, listener: ItemCallback) :
     fun bind(userModel: UserModel?) {
 
         with(viewBinding) {
-            card.setOnClickListener { listener?.onClick(userModel?.userId) }
+            card.setOnClickListener { listener?.onClick(userModel) }
             title.text = userModel?.displayName
         }
     }
@@ -61,5 +61,5 @@ private object ArticleDiffItemCallback : DiffUtil.ItemCallback<UserModel>() {
 }
 
 interface ItemCallback {
-    fun onClick(userId: Int?)
+    fun onClick(userId: UserModel?)
 }

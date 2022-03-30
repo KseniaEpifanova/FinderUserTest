@@ -35,14 +35,16 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail) {
             R.id.main_navigation
         )
     }
+
     private val args: DetailUserFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        DetailUserFragmentComponent.init(requireActivity() as AppCompatActivity, args.idArg)
+        DetailUserFragmentComponent.init(requireActivity() as AppCompatActivity, args.modelArg)
             .inject(this)
+
         subscribeToViewModel()
-        setOptionsMenuVisible(true)
+        setOptionsMenuVisible()
         (activity as MainActivity).setSupportActionBar(toolbarView)
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
@@ -51,9 +53,9 @@ class DetailUserFragment : Fragment(R.layout.fragment_detail) {
         viewModel.setModel.observeToSafe(this, ::onDetailReceived)
     }
 
-    private fun setOptionsMenuVisible(isVisible: Boolean) {
-        setMenuVisibility(isVisible)
-        setHasOptionsMenu(isVisible)
+    private fun setOptionsMenuVisible() {
+        setMenuVisibility(true)
+        setHasOptionsMenu(true)
     }
 
     private fun onDetailReceived(model: DetailModel) {

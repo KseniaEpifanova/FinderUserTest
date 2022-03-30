@@ -12,6 +12,7 @@ import com.ksuta.finderusertest.screens.details.DetailRepository
 import com.ksuta.finderusertest.screens.details.DetailUserFragment
 import com.ksuta.finderusertest.screens.details.DetailUserViewModel
 import com.ksuta.finderusertest.screens.details.IDetailRepository
+import com.ksuta.finderusertest.screens.search.UserModel
 import dagger.*
 import dagger.multibindings.IntoMap
 import retrofit2.Retrofit
@@ -25,15 +26,15 @@ interface DetailUserFragmentComponent {
     fun inject(fragment: DetailUserFragment)
 
     companion object {
-        fun init(activity: AppCompatActivity, ids: Int): DetailUserFragmentComponent =
-            DaggerDetailUserFragmentComponent.factory().newInstance(activity, ids, activity.appComponent)
+        fun init(activity: AppCompatActivity, model: UserModel?): DetailUserFragmentComponent =
+            DaggerDetailUserFragmentComponent.factory().newInstance(activity, model, activity.appComponent)
     }
 
     @Component.Factory
     interface Factory {
         fun newInstance(
             @BindsInstance activity: AppCompatActivity,
-            @BindsInstance ids: Int,
+            @BindsInstance model: UserModel?,
             appComponent: AppComponent
         ): DetailUserFragmentComponent
     }
